@@ -65,3 +65,125 @@ const nav = () => {
     });
 };
 nav();
+
+const swiperSlides = () => {
+    const swipers = {};
+    let currentActiveSwiper = null;
+
+    const sliderConfigs = {
+        featured: {
+            selector: '.featured-swiper',
+            navigation: {
+                prevEl: '.featured__navigation .arrow_prev',
+                nextEl: '.featured__navigation .arrow_next',
+                disabledClass: 'is-disabled',
+            },
+            config: {
+                slidesPerView: 3.5,
+                spaceBetween: 40,
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1.2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2.2,
+                        spaceBetween: 30,
+                    },
+                    1024: {
+                        slidesPerView: 3.5,
+                        spaceBetween: 40,
+                    },
+                },
+            },
+        },
+        // others sliders
+    };
+
+    const bindCustomNavigation = (swiper, configName) => {
+        const nav = sliderConfigs[configName]?.navigation;
+        if (!nav) return;
+
+        swiper.params.navigation = {
+            prevEl: nav.prevEl,
+            nextEl: nav.nextEl,
+            disabledClass: nav.disabledClass || 'is-disabled',
+        };
+
+        swiper.navigation?.init?.();
+        swiper.navigation?.update?.();
+    };
+
+    document.querySelectorAll('[data-swiper-config]').forEach(container => {
+        const configName = container.dataset.swiperConfig;
+        const configData = sliderConfigs[configName];
+
+        if (!configData) return;
+
+        const swiperEl = container.querySelector(configData.selector);
+        if (!swiperEl) return;
+
+        const swiperType = swiperEl.getAttribute('data-swiper');
+        if (!swiperType) return;
+
+        const baseConfig = configData.config || {};
+        const userOn = baseConfig.on || {};
+
+        const swiperConfig = {
+            ...baseConfig,
+            on: {
+                ...userOn,
+                init(swiperInstance) {
+                    bindCustomNavigation(swiperInstance, configName);
+                    if (typeof userOn.init === 'function') {
+                        userOn.init(swiperInstance);
+                    }
+                },
+            },
+        };
+
+        const swiperInstance = new Swiper(swiperEl, swiperConfig);
+        swipers[swiperType] = swiperInstance;
+    });
+
+    const setActiveSwiper = tabId => {
+        const activeSwiperEl = document.querySelector(`#${tabId} .featured-swiper`);
+        if (!activeSwiperEl) return;
+
+        const swiperType = activeSwiperEl.getAttribute('data-swiper');
+        currentActiveSwiper = swipers[swiperType];
+
+        if (!currentActiveSwiper) return;
+
+        currentActiveSwiper.slideTo(0, 0);
+        currentActiveSwiper.navigation?.update?.();
+    };
+
+    setActiveSwiper('house');
+
+    return { swipers, setActiveSwiper };
+};
+
+const tabs = () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabButtons = document.querySelectorAll('.tab__button');
+        const tabPanes = document.querySelectorAll('.tab__panel');
+
+        const { setActiveSwiper } = swiperSlides();
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const tabId = this.getAttribute('data-tab');
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+
+                setActiveSwiper(tabId);
+            });
+        });
+    });
+};
+tabs();
