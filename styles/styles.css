@@ -997,6 +997,108 @@ h2 {
     transform: translateY(-50%);
 }
 
+/* Reviews */
+
+.reviews__wrapper {
+    overflow: visible;
+    padding: 0;
+}
+
+.reviews__header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.reviews__img-wrap {
+    position: relative;
+}
+
+.rewiews__content {
+    max-width: 612px;
+    width: 100%;
+    position: absolute;
+    bottom: -106px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 9px 32px 0 rgba(89, 92, 219, 0.05);
+    padding: 32px;
+}
+
+.reviews__review-title {
+    font-weight: 600;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: var(--dark-blue);
+    margin-bottom: 16px;
+}
+
+.reviews__review-text {
+    font-size: 14px;
+    line-height: 171%;
+    color: var(--blue);
+    opacity: 0.75;
+    margin-bottom: 24px;
+}
+
+.reviews__img-person-wrap {
+    max-width: 40px;
+}
+
+.reviews__person-name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 157%;
+    color: var(--dark);
+}
+
+.reviews__person-job {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 157%;
+    color: var(--grey);
+}
+
+.reviews__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.reviews__person {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.reviews__person-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.reviews__rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reviews__rating-count {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 140%;
+    color: var(--grey-2);
+}
+
+.reviews__navigation {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 150px;
+}
+
 /* More info */
 
 .more-info .sub-text {

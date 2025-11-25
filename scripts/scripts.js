@@ -97,7 +97,34 @@ const swiperSlides = () => {
                 },
             },
         },
-        // others sliders
+        reviews: {
+            selector: '.reviews__swiper',
+            navigation: {
+                prevEl: '.reviews__navigation .arrow_prev',
+                nextEl: '.reviews__navigation .arrow_next',
+                disabledClass: 'is-disabled',
+            },
+            config: {
+                slidesPerView: 2.2,
+                spaceBetween: 40,
+                loop: true,
+                centeredSlides: true,
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1.2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2.2,
+                        spaceBetween: 30,
+                    },
+                    1024: {
+                        slidesPerView: 1.9,
+                        spaceBetween: 40,
+                    },
+                },
+            },
+        },
     };
 
     const bindCustomNavigation = (swiper, configName) => {
@@ -123,8 +150,7 @@ const swiperSlides = () => {
         const swiperEl = container.querySelector(configData.selector);
         if (!swiperEl) return;
 
-        const swiperType = swiperEl.getAttribute('data-swiper');
-        if (!swiperType) return;
+        const swiperType = swiperEl.getAttribute('data-swiper') || configName;
 
         const baseConfig = configData.config || {};
         const userOn = baseConfig.on || {};
