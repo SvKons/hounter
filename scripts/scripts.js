@@ -95,6 +95,11 @@ const swiperSlides = () => {
                         spaceBetween: 40,
                     },
                 },
+                on: {
+                    init(swiperInstance) {
+                        bindCustomNavigation(swiperInstance, 'featured');
+                    },
+                },
             },
         },
         reviews: {
@@ -123,6 +128,11 @@ const swiperSlides = () => {
                         spaceBetween: 40,
                     },
                 },
+                on: {
+                    init(swiperInstance) {
+                        bindCustomNavigation(swiperInstance, 'reviews');
+                    },
+                },
             },
         },
     };
@@ -145,30 +155,19 @@ const swiperSlides = () => {
         const configName = container.dataset.swiperConfig;
         const configData = sliderConfigs[configName];
 
-        if (!configData) return;
+        if (!configData || !configData.selector) {
+            console.warn(`Конфигурация для ${configName} не найдена или не содержит selector`);
+            return;
+        }
 
         const swiperEl = container.querySelector(configData.selector);
-        if (!swiperEl) return;
+        if (!swiperEl) {
+            console.warn(`Элемент для ${configName} не найден`);
+            return;
+        }
 
         const swiperType = swiperEl.getAttribute('data-swiper') || configName;
-
-        const baseConfig = configData.config || {};
-        const userOn = baseConfig.on || {};
-
-        const swiperConfig = {
-            ...baseConfig,
-            on: {
-                ...userOn,
-                init(swiperInstance) {
-                    bindCustomNavigation(swiperInstance, configName);
-                    if (typeof userOn.init === 'function') {
-                        userOn.init(swiperInstance);
-                    }
-                },
-            },
-        };
-
-        const swiperInstance = new Swiper(swiperEl, swiperConfig);
+        const swiperInstance = new Swiper(swiperEl, configData.config);
         swipers[swiperType] = swiperInstance;
     });
 
