@@ -87,7 +87,7 @@ const swiperSlides = () => {
                         spaceBetween: 20,
                     },
                     768: {
-                        slidesPerView: 2.2,
+                        slidesPerView: 2.8,
                         spaceBetween: 30,
                     },
                     1024: {
@@ -110,22 +110,18 @@ const swiperSlides = () => {
                 disabledClass: 'is-disabled',
             },
             config: {
-                slidesPerView: 2.2,
-                spaceBetween: 40,
+                slidesPerView: 2,
+                spaceBetween: 20,
                 loop: true,
                 centeredSlides: true,
                 breakpoints: {
                     320: {
-                        slidesPerView: 1.2,
+                        slidesPerView: 1.5,
                         spaceBetween: 20,
                     },
                     768: {
-                        slidesPerView: 2.2,
+                        slidesPerView: 1.5,
                         spaceBetween: 30,
-                    },
-                    1024: {
-                        slidesPerView: 1.9,
-                        spaceBetween: 40,
                     },
                 },
                 on: {
