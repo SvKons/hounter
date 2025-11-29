@@ -79,12 +79,12 @@ const swiperSlides = () => {
                 disabledClass: 'is-disabled',
             },
             config: {
-                slidesPerView: 3.5,
-                spaceBetween: 40,
+                slidesPerView: 1.2,
+                spaceBetween: 20,
                 breakpoints: {
-                    320: {
-                        slidesPerView: 1.2,
-                        spaceBetween: 20,
+                    550: {
+                        slidesPerView: 2.2,
+                        spaceBetween: 30,
                     },
                     768: {
                         slidesPerView: 2.8,
@@ -110,18 +110,20 @@ const swiperSlides = () => {
                 disabledClass: 'is-disabled',
             },
             config: {
-                slidesPerView: 2,
+                slidesPerView: 1.2,
                 spaceBetween: 20,
                 loop: true,
-                centeredSlides: true,
+                centeredSlides: false,
                 breakpoints: {
-                    320: {
-                        slidesPerView: 1.5,
+                    425: {
+                        slidesPerView: 1.4,
                         spaceBetween: 20,
+                        centeredSlides: false,
                     },
                     768: {
                         slidesPerView: 1.5,
                         spaceBetween: 30,
+                        centeredSlides: true,
                     },
                 },
                 on: {
