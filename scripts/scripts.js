@@ -6,16 +6,11 @@ const scrollArrow = () => {
     }
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            scrollToTopButton.classList.add('visible');
-        } else {
-            scrollToTopButton.classList.remove('visible');
-        }
+        scrollToTopButton.classList.toggle('visible', window.scrollY > 100);
     });
 
     scrollToTopButton.addEventListener('click', event => {
         event.preventDefault();
-
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -210,3 +205,16 @@ const tabs = () => {
     });
 };
 tabs();
+
+const lenis = new Lenis({
+    lerp: 0.1,
+    smooth: true,
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+});
+
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
